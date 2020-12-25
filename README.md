@@ -1,4 +1,4 @@
-# CitaRasa Web <img src="https://img.shields.io/badge/Built%20with-VueJs-41B883?style=popout&logo=vue.js">
+# Cekcuaca Web <img src="https://img.shields.io/badge/Built%20with-VueJs-41B883?style=popout&logo=vue.js">
 
 <div align="center">
     <img width="250" src="./src/assets/logo.png">
