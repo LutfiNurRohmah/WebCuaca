@@ -57,8 +57,8 @@ Visit [OpenWeather](https://openweathermap.org/) for getting apikey
 
 ## Demo Cekcuaca
 
-Try this Cekcuaca Web build version below
+Try Cekcuaca Web build version below
 
-<a href="http://54.175.146.137:3002">
+<a href="https://cek-cuaca.netlify.app/">
   <img src="https://img.shields.io/badge/Cekcuaca-Link%20Demo-41B883.svg"/>
 </a>
