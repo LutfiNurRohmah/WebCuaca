@@ -15,7 +15,7 @@
 
 ## Description
 
-**Cekcuaca** is a simple website for checking the weather in a particular city.
+**Cekcuaca** is a simple website for checking the weather in a specific city.
 Built with Vue.Js and using [OpenWeather](https://openweathermap.org/) api.
 
 This web is a progressive web application, so you can install or add to mobile
