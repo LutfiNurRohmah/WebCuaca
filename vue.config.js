@@ -7,7 +7,7 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: "black",
     manifestOptions: {
       name: "Cekcuaca", // <---- this is PWA name
-      // short_name: "Cekcuaca Web",
+      short_name: "Cekcuaca",
       display: "standalone",
       background_color: "rgb(0, 119, 255)",
       orientation: "portrait",
