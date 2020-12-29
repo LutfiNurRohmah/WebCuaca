@@ -56,7 +56,7 @@ Visit [OpenWeather](https://openweathermap.org/) for getting apikey
 ## Screenshoots
 
 <div align="center">
-    <img width="100%" src="./src/assets/screenshoot.png">
+    <img width="100%" src="./src/assets/screenshoot.PNG">
 </div>
 
 ## Demo Cekcuaca
