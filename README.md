@@ -55,6 +55,10 @@ Visit [OpenWeather](https://openweathermap.org/) for getting apikey
 
 ## Screenshoots
 
+<div align="center">
+    <img width="100%" src="./src/assets/screenshoot.png">
+</div>
+
 ## Demo Cekcuaca
 
 Try Cekcuaca Web build version below
