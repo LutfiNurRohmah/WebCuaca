@@ -120,7 +120,9 @@ export default {
   data() {
     return {
       keyword: "",
+      coordinat: {},
       data: { isLoading: false },
+      data2: { isLoading: false },
       error: "",
       baseURL: "https://api.openweathermap.org",
       apiKey: process.env.VUE_APP_APIKEY,
@@ -135,6 +137,24 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.data = { ...data, isLoading: false };
+          const coordinat = data.coord
+          this.get5daysweather(coordinat.lat, coordinat.lon)
+        })
+        .catch((err) => (this.error = err));
+
+    },
+    get5daysweather(lat, lon) {
+      this.data2 = { ...this.data2, isLoading: true };
+      fetch(
+        `${this.baseURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          this.data2 = { ...data, isLoading: false };
+          data.list.forEach(datetime => {
+            console.log(datetime.dt_txt)
+          });
+          // console.log(this.data2.list[0].dt_txt) //data waktu
         })
         .catch((err) => (this.error = err));
     },
