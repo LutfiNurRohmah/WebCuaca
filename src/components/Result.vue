@@ -11,6 +11,19 @@
     </div>
     <div class="result_content" v-if="data.weather && !data.isLoading">
       <h3 class="result_nameCity">{{ data.name }}, {{ data.sys.country }}</h3>
+      
+      <div v-for="(cuaca) in data2.list.slice(0, 5)">
+        <div class="result_content2" v-if="cuaca.weather && !data2.isLoading">
+          <h5>{{ formatTime(cuaca.dt_txt) }}</h5>
+        <img
+        :src="`http://openweathermap.org/img/wn/${cuaca.weather[0].icon}@2x.png`"
+        />
+        <h4>{{ cuaca.weather[0].description }}</h4>
+        </div>
+      </div>
+      
+      <h4>{{ formatDate(data2.list[2].dt_txt) }}</h4>
+      <h5>{{ formatTime(data2.list[2].dt_txt) }}</h5>
       <img
         :src="`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`"
       />
@@ -71,7 +84,7 @@
 import { FacebookLoader, SpinnerLoader } from "vue-spinners-css";
 export default {
   name: "Result",
-  props: ["data"],
+  props: ["data", "data2"],
   data() {
     return {
       condition: {
@@ -92,6 +105,39 @@ export default {
         Tornado: "Tornado",
       },
     };
+  },
+  methods: {
+    formatTime(dateTimeString) {
+      const dateTime = new Date(dateTimeString);
+      const hours = dateTime.getHours().toString().padStart(2, '0');
+      const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    },
+    formatDateTime(dateTimeString) {
+      const dateTime = new Date(dateTimeString);
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short',
+      };
+      const formatter = new Intl.DateTimeFormat('id-ID', options);
+      return formatter.format(dateTime);
+    },
+    formatDate(dateTimeString) {
+      const dateTime = new Date(dateTimeString);
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      };
+      const formatter = new Intl.DateTimeFormat('id-ID', options);
+      return formatter.format(dateTime);
+    },
   },
 };
 </script>
@@ -120,6 +166,11 @@ export default {
   padding: 15px;
   color: #ffffff;
   min-width: 50%;
+}
+.result_content2 {
+  background-color: rgba(0, 255, 0, 0.5);
+  border-radius: 10px;
+  color: #ffffff;
 }
 @media screen and (max-width: 768px) {
   .result_content {

@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <Result v-bind:data="data"></Result>
+    <Result v-bind:data="data" v-bind:data2="data2"></Result>
   </div>
 </template>
 
@@ -146,14 +146,14 @@ export default {
     get5daysweather(lat, lon) {
       this.data2 = { ...this.data2, isLoading: true };
       fetch(
-        `${this.baseURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}`
+        `${this.baseURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=metric&lang=id`
       )
         .then((res) => res.json())
         .then((data) => {
           this.data2 = { ...data, isLoading: false };
-          data.list.forEach(datetime => {
-            console.log(datetime.dt_txt)
-          });
+          // data.list.forEach(datetime => {
+          //   console.log(datetime.dt_txt)
+          // });
           // console.log(this.data2.list[0].dt_txt) //data waktu
         })
         .catch((err) => (this.error = err));
