@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es2015", // Perhatikan perubahan nilai ini
+    "module": "commonjs",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "skipLibCheck": true
+  }
+}
