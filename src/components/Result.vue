@@ -22,8 +22,8 @@
         </div>
       </div>
       
-      <h4>{{ formatDate(data2.list[2].dt_txt) }}</h4>
-      <h5>{{ formatTime(data2.list[2].dt_txt) }}</h5>
+      <h4>{{ getCurrentDate() }}</h4>
+      <h5>{{ getCurrentTime() }}</h5>
       <img
         :src="`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`"
       />
@@ -113,20 +113,6 @@ export default {
       const minutes = dateTime.getMinutes().toString().padStart(2, '0');
       return `${hours}:${minutes}`;
     },
-    formatDateTime(dateTimeString) {
-      const dateTime = new Date(dateTimeString);
-      const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        timeZoneName: 'short',
-      };
-      const formatter = new Intl.DateTimeFormat('id-ID', options);
-      return formatter.format(dateTime);
-    },
     formatDate(dateTimeString) {
       const dateTime = new Date(dateTimeString);
       const options = {
@@ -137,6 +123,27 @@ export default {
       };
       const formatter = new Intl.DateTimeFormat('id-ID', options);
       return formatter.format(dateTime);
+    },
+    getCurrentDate() {
+      const today = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      };
+      const formatter = new Intl.DateTimeFormat('id-ID', options);
+      return formatter.format(today);
+    },
+    getCurrentTime() {
+      const today = new Date();
+      const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short',
+      };
+      const formatter = new Intl.DateTimeFormat('id-ID', options);
+      return formatter.format(today);
     },
   },
 };
