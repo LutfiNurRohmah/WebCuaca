@@ -6,74 +6,93 @@
         : `result_container`
     "
   >
+
     <div v-if="data.isLoading">
       <SpinnerLoader color="rgb(0, 119, 255)" />
     </div>
-    <div class="result_content" v-if="data.weather && !data.isLoading">
-      <h3 class="result_nameCity">{{ data.name }}, {{ data.sys.country }}</h3>
-      
-      <div v-for="(cuaca) in data2.list.slice(0, 5)">
-        <div class="result_content2" v-if="cuaca.weather && !data2.isLoading">
-          <h5>{{ formatTime(cuaca.dt_txt) }}</h5>
-        <img
-        :src="`http://openweathermap.org/img/wn/${cuaca.weather[0].icon}@2x.png`"
+
+    <div class="container-today" v-if="data.weather && !data.isLoading">
+      <div class="result-today" >
+        <div class="date-cuaca">{{ formatDate(data2.list[2].dt_txt) }}</div>
+        <img class="icon-cuaca2"
+          :src="`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`"
         />
-        <h4>{{ cuaca.weather[0].description }}</h4>
-        </div>
+        <div class="judul-cuaca">{{ condition[data.weather[0].main] }}</div>
+        <div class="description-cuaca">"{{ data.weather[0].description }}"</div>
+
+        <table class="result_table">
+          <div class="result-table-row">
+              <div class="result-table-column-1">
+                <tr class="result_tableRow">
+                  <td><h5>Suhu rerata</h5></td>
+                  <td>
+                    <h5 class="tableValue">
+                      {{ data.main.temp }} <span>&#176;C</span>
+                    </h5>
+                  </td>
+                </tr>
+                <tr class="result_tableRow">
+                  <td><h5>Suhu minimum</h5></td>
+                  <td>
+                    <h5 class="tableValue">
+                      {{ data.main.temp_min }} <span>&#176;C</span>
+                    </h5>
+                  </td>
+                </tr>
+                <tr class="result_tableRow">
+                  <td><h5>Suhu maksimum</h5></td>
+                  <td>
+                    <h5 class="tableValue">
+                      {{ data.main.temp_max }} <span>&#176;C</span>
+                    </h5>
+                  </td>
+                </tr>
+              </div>
+
+              <div class="result-table-column-2">
+                <tr class="result_tableRow">
+                  <td><h5>Tekanan</h5></td>
+                  <td>
+                    <h5 class="tableValue">{{ data.main.pressure }} hPa</h5>
+                  </td>
+                </tr>
+                <tr class="result_tableRow">
+                  <td><h5>Kelembapan</h5></td>
+                  <td>
+                    <h5 class="tableValue">{{ data.main.humidity }}%</h5>
+                  </td>
+                </tr>
+                <tr class="result_tableRow">
+                  <td><h5>Kecepatan Angin</h5></td>
+                  <td>
+                    <h5 class="tableValue">{{ data.wind.speed }} m/s</h5>
+                  </td>
+                </tr>
+              </div>
+          </div>
+        </table>
       </div>
-      
-      <h4>{{ formatDate(data2.list[2].dt_txt) }}</h4>
-      <h5>{{ formatTime(data2.list[2].dt_txt) }}</h5>
-      <img
-        :src="`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`"
-      />
-      <h1>{{ condition[data.weather[0].main] }}</h1>
-      <h5 class="result_description">"{{ data.weather[0].description }}"</h5>
-      <table class="result_table">
-        <tr class="result_tableRow">
-          <td><h5>Suhu rerata</h5></td>
-          <td>
-            <h5 class="tableValue">
-              {{ data.main.temp }} <span>&#176;C</span>
-            </h5>
-          </td>
-        </tr>
-        <tr class="result_tableRow">
-          <td><h5>Suhu minimum</h5></td>
-          <td>
-            <h5 class="tableValue">
-              {{ data.main.temp_min }} <span>&#176;C</span>
-            </h5>
-          </td>
-        </tr>
-        <tr class="result_tableRow">
-          <td><h5>Suhu maksimum</h5></td>
-          <td>
-            <h5 class="tableValue">
-              {{ data.main.temp_max }} <span>&#176;C</span>
-            </h5>
-          </td>
-        </tr>
-        <tr class="result_tableRow">
-          <td><h5>Tekanan</h5></td>
-          <td>
-            <h5 class="tableValue">{{ data.main.pressure }} hPa</h5>
-          </td>
-        </tr>
-        <tr class="result_tableRow">
-          <td><h5>Kelembapan</h5></td>
-          <td>
-            <h5 class="tableValue">{{ data.main.humidity }}%</h5>
-          </td>
-        </tr>
-        <tr class="result_tableRow">
-          <td><h5>Kecepatan Angin</h5></td>
-          <td>
-            <h5 class="tableValue">{{ data.wind.speed }} m/s</h5>
-          </td>
-        </tr>
-      </table>
     </div>
+
+    <div class="container-5-days" v-if="data.weather && !data.isLoading">
+        
+        <div class="result-5-days">
+          <h3 class="nama-kota">{{ data.name }}, {{ data.sys.country }}</h3>
+          <div class="result-collect" >
+              <div class="result-content-2">
+                <div v-for="(cuaca) in data2.list.slice(0, 5)">
+                  <div class="jam">{{ formatTime(cuaca.dt_txt) }}</div>
+                  <img class="icon-cuaca"
+                  :src="`http://openweathermap.org/img/wn/${cuaca.weather[0].icon}@2x.png`"
+                  />
+                  <div class="kondisi-cuaca">{{ cuaca.weather[0].description }}</div>
+                </div>
+              </div>
+          </div>
+        </div>
+        
+      </div>
+    
     <div v-else-if="data.message && !data.isLoading">
       <h5 class="result_notfound">Kota tidak ditemukan</h5>
     </div>
@@ -160,20 +179,18 @@ export default {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.result_content {
-  background-color: rgba(0, 119, 255, 0.5);
-  border-radius: 10px;
-  padding: 15px;
-  color: #ffffff;
-  min-width: 50%;
+.result-today {
+  background: #fcc173;
+  border-radius: 16px;
+  width: 500px;
+  height: 400px;
+  position: relative;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
-.result_content2 {
-  background-color: rgba(0, 255, 0, 0.5);
-  border-radius: 10px;
-  color: #ffffff;
-}
+
 @media screen and (max-width: 768px) {
-  .result_content {
+  .result-today {
     min-width: 90%;
   }
 }
@@ -189,15 +206,184 @@ export default {
   margin-top: -5px;
 }
 .result_table {
-  width: 100%;
+  width: 399px;
+  height: 130px;
+  position: relative;
+  overflow: hidden;
 }
 .result_tableRow {
   color: #ffffff;
+
 }
 .tableValue {
   padding-left: 10px;
 }
 .result_tempAverage {
   position: relative;
+}
+.result-table-row {
+  position: absolute;
+  inset: 0;
+}
+.result-table-column-1 {
+  position: absolute;
+  right: 55.14%;
+  left: 4.76%;
+  width: 40.1%;
+  bottom: 20%;
+  top: 20.77%;
+  height: 59.23%;
+}
+.result-table-column-2 {
+  position: absolute;
+  right: 4.76%;
+  left: 53.38%;
+  width: 41.85%;
+  bottom: 20%;
+  top: 20.77%;
+  height: 59.23%;
+}
+</style>
+
+<style scoped>
+.container-today {
+  background: #ffffff;
+  width: 570px;
+  height: 435px;
+  position: relative;
+  overflow: hidden;
+}
+.container-5-days {
+  background: #ffffff;
+  width: 870px;
+  height: 435px;
+  position: relative;
+  overflow: hidden;
+}
+.result-5-days {
+  background: #f6f1ee;
+  border-radius: 16px;
+  width: 800px;
+  height: 400px;
+  position: relative;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.result-collect {
+  display: grid;
+  grid-auto-flow: column;
+  scroll-behavior: auto;
+  overflow-y: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 16px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+/* Optionally, you can add a custom scrollbar style for better appearance */
+.result-collect::-webkit-scrollbar {
+  display: none;
+}
+
+.container-5-days .result-content-2 {
+  display: flex;
+  gap: 20px; /* Adjust the gap between cards */
+  overflow-x: auto;
+}
+
+.result-content-2 {
+  background: #f6f1ee;
+  border-radius: 2px;
+  padding: 10px 25px 10px 25px;
+  flex: 0 0 auto; /* Allow items to shrink, but don't grow */
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
+}
+
+.result-content-2 > div {
+  scroll-snap-align: start;
+  text-align: center;
+  background-color: #fcc173;
+  padding: 10px 10px;
+  height: 300px;
+  width: 230px;
+  border-radius: 8px;
+}
+
+.nama-kota {
+  color: #292929;
+  text-align: center;
+  font: 700 30px "ProductSans-Bold", sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0px 0px 0px
+}
+.jam {
+  color: #292929;
+  text-align: center;
+  font: 700 30px "ProductSans-Bold", sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0px 0px 0px;
+}
+.icon-cuaca {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin-top: 25px;
+  align-items: center;
+}
+.icon-cuaca2 {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin-top: 25px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kondisi-cuaca {
+  color: #292929;
+  text-align: center;
+  font: 500 25px "ProductSans-Regular", sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+.date-cuaca {
+  color: #292929;
+  text-align: center;
+  font: 700 30px "ProductSans-Bold", sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.judul-cuaca {
+  color: #292929;
+  text-align: center;
+  font: 700 25px "ProductSans-Bold", sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.description-cuaca {
+  color: #292929;
+  text-align: center;
+  font: 400 italic 25px "ProductSans-Italic", sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -1,19 +1,19 @@
 <template>
-  <div class="home">
-
+  <!-- Halaman Home -->
+  <div class="web-cek-cuaca">
+    <!-- Navigation Bar -->
     <div class="navbar">
-      <div class="frame-4">
         <div class="cek-cuaca">CekCuaca</div>
-        <div class="frame-3">
+        <div class="menu-items">
           <div class="beranda">Beranda</div>
           <div class="about-us">About Us</div>
         </div>
-      </div>
     </div>
-
-    <div class="search_container">
-      <div class="search_inputContainer">
-        <div class="input_wrap">
+    <!-- Content Search -->
+    <div class="dashboard">
+      <div class="content-search">
+        <div class="judul-dashboard">Cek cuaca di lokasimu</div>
+        <div class="input-cari">
           <input
             class="input_search"
             placeholder="Cari kota di sini..."
@@ -21,77 +21,34 @@
             @keypress.enter="searchAction"
           />
         </div>
-
-        <div @click="searchAction" class="input_btn">
+        <!-- Button -->
+        <div @click="searchAction" class="button">
           <div class="cari3">Cari</div>
         </div>
-
       </div>
     </div>
-    <Result v-bind:data="data"></Result>
-    
-    <div class="cek-cuaca-di-lokasimu">Cek cuaca di lokasimu</div>
+    <!-- Hasil -->
+    <Result v-bind:data="data" v-bind:data2="data2"></Result>
 
     <div class="icon-sun">
+      <img class="icon-weather" src="@/assets/icon_weather.png" />
+    </div>
+
+    <!-- <div class="icon-sun">
       <img class="bolt-isolated-2" src="@/assets/sun.png" />
     </div>
     <div class="icon-clouds">
       <img class="bolt-isolated-2" src="@/assets/clouds.png" />
-    </div>
-
+    </div> -->
   </div>
 </template>
 
-<!-- <template>
-  <div class="web-cek-cuaca">
-  <div class="navbar">
-    <div class="frame-4">
-      <div class="cek-cuaca">CekCuaca</div>
-      <div class="frame-3">
-        <div class="beranda">Beranda</div>
-        <div class="about-us">About Us</div>
-      </div>
-    </div>
-  </div>
-  
-
-  
-  <div class="vector-weather">
-    <div class="icon-sun">
-      <img class="bolt-isolated-2" src="@/assets/sun.png" />
-    </div>
-    <div class="icon-clouds">
-      <img class="bolt-isolated-2" src="@/assets/clouds.png" />
-    </div>
-  </div>
-
-  <div class="cari">
-    <div class="search">
-      <input
-            class="input_search"
-            placeholder="Cari lokasi..."
-            v-model="keyword"
-            @keypress.enter="searchAction"
-          />
-    </div>    
-  </div>
-
-  
-
-  <div class="button-cari">
-    <div class="rectangle-2"></div>
-    <div class="cari2">Cari</div>
-  </div>
-    <div class="cek-cuaca-di-lokasimu">Cek cuaca di lokasimu</div>
-  </div>
-</template> -->
-
 <style scoped>
-.home,
-.home * {
+.web-cek-cuaca,
+.web-cek-cuaca * {
   box-sizing: border-box;
 }
-.home {
+.web-cek-cuaca {
   background: #ffffff;
   width: auto;
   height: auto;
@@ -126,7 +83,7 @@
   align-items: center;
   justify-content: flex-start;
 }
-.frame-3 {
+.menu-items {
   display: flex;
   flex-direction: row;
   gap: 57px;
@@ -244,28 +201,38 @@
   align-items: center;
   justify-content: flex-start;
 }
-.cek-cuaca-di-lokasimu {
+.judul-dashboard {
   color: #292929;
   text-align: left;
-  font: 700 60px "ProductSans-Bold", sans-serif;
-  position: absolute;
-  left: 141px;
-  top: calc(32% - 90px);
+  font: 700 50px "ProductSans-Bold", sans-serif;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
+</style>
 
-
-.search_container {
+<style scoped>
+.dashboard {
   background: #ffffff;
-  padding: 0;
+  padding: 0px 120px 0px 120px;
   margin: 0;
   display: flex;
   flex-direction: row;
+  gap: 200px;
   align-items: center;
-  justify-content: center;
-  height: 768px;
+  justify-content: flex-start;
+  width: auto;
+  height: 350px;
+  position: relative;
+  overflow: hidden;
+}
+.icon-weather {
+  flex-shrink: 0;
+  margin-left: 150px;
+  width: 350px;
+  height: 340px;
+  position: relative;
 }
 .search_logo {
   display: flex;
@@ -280,7 +247,7 @@
   .search_logo > img {
     height: 15vh;
   }
-  .search_container {
+  .dashboard {
     flex-direction: column;
     height: 30vh;
   }
@@ -291,23 +258,24 @@
 .search_logo > h3 {
   font-size: 17px;
 }
-.search_inputContainer {
-  flex: 0.8;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.input_wrap {
-  width: 400px;
-  height: 55px;
-  border-radius: 5px;
+.content-search {
   display: flex;
   flex-direction: row;
-  background: #f6f1ee;
-  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  width: 606px;
+  position: relative;
+}
+.input-cari {
+  flex-shrink: 0;
+  width: 400px;
+  height: 55px;
+  position: static;
 }
 .input_search {
-  flex: 1;
   height: 55px;
   border-radius: 5px;
   border: none;
@@ -319,6 +287,8 @@
   border-style: solid;
   border-color: #ffcc70;
   border-width: 2px;
+  width: 400px;
+  position: absolute;
 }
 .input_search:focus {
   font-size: 15px;
@@ -328,7 +298,7 @@
   color: rgba(41, 41, 41, 0.5);
   font-weight: 500;
 }
-.input_btn {
+.button {
   left: 15px;
   flex: 0.2;
   display: flex;
@@ -336,11 +306,16 @@
   align-items: center;
   background: #ee9322;
   border-radius: 5px;
+  width: 110px;
   height: 55px;
+  position: absolute;
   cursor: pointer;
-  position: relative;
+  left: 415px;
+  bottom: 0px;
+  top: auto;
 }
 </style>
+
 
 <script>
 // @ is an alias to /src
