@@ -28,7 +28,7 @@
 
       </div>
     </div>
-    <Result v-bind:data="data"></Result>
+    <Result v-bind:data="data" v-bind:data2="data2"></Result>
     
     <div class="cek-cuaca-di-lokasimu">Cek cuaca di lokasimu</div>
 
@@ -40,6 +40,16 @@
     </div>
 
   </div>
+
+  <!-- <div v-for="(cuaca) in data3">
+        <div class="result_content2" v-if="cuaca.weather && !data2.isLoading">
+          <h5>{{ formatTime(cuaca.dt_txt) }}</h5>
+        <img
+        :src="`http://openweathermap.org/img/wn/${cuaca.weather[0].icon}@2x.png`"
+        />
+        <h4>{{ cuaca.weather[0].description }}</h4>
+        </div>
+  </div> -->
 </template>
 
 <!-- <template>
@@ -357,9 +367,18 @@ export default {
       coordinat: {},
       data: { isLoading: false },
       data2: { isLoading: false },
+      datacuacakota: { isLoading: false },
+      data3: {},
       error: "",
       baseURL: "https://api.openweathermap.org",
       apiKey: process.env.VUE_APP_APIKEY,
+      kota: [
+        "ambon",
+        "aceh",
+        "jakarta",
+        "yogyakarta",
+        "surabaya"
+      ]
     };
   },
   methods: {
@@ -392,6 +411,25 @@ export default {
         })
         .catch((err) => (this.error = err));
     },
+    cekcuacakota(kota) {
+      this.datacuacakota = { ...this.datacuacakota, isLoading: true };
+      fetch(
+        `${this.baseURL}/data/2.5/weather?q=${kota}&appid=${this.apiKey}&units=metric&lang=id`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          // this.datacuacakota = { ...data, isLoading: false };
+          this.$set(this.data3, kota, { ...data});
+          // console.log(this.data3)
+        })
+        .catch((err) => {
+          this.error = err
+          this.$set(this.datacuacakota, kota, { isLoading: false, error: err })
+        });
+    },
+  },
+  created() {
+    this.kota.forEach(namakota => this.cekcuacakota(namakota))
   },
 };
 </script>

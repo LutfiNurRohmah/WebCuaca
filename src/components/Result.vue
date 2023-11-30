@@ -12,18 +12,20 @@
     <div class="result_content" v-if="data.weather && !data.isLoading">
       <h3 class="result_nameCity">{{ data.name }}, {{ data.sys.country }}</h3>
       
-      <div v-for="(cuaca) in data2.list.slice(0, 5)">
+      <div class="scroll_container">
+      <div v-for="(cuaca) in data2.list.slice(0, 10)">
         <div class="result_content2" v-if="cuaca.weather && !data2.isLoading">
           <h5>{{ formatTime(cuaca.dt_txt) }}</h5>
         <img
         :src="`http://openweathermap.org/img/wn/${cuaca.weather[0].icon}@2x.png`"
         />
-        <h4>{{ cuaca.weather[0].description }}</h4>
+        <h4 class="text_description">{{ cuaca.weather[0].description }}</h4>
         </div>
       </div>
+      </div>
       
-      <h4>{{ formatDate(data2.list[2].dt_txt) }}</h4>
-      <h5>{{ formatTime(data2.list[2].dt_txt) }}</h5>
+      <h4>{{ getCurrentDate() }}</h4>
+      <h5>{{ getCurrentTime() }}</h5>
       <img
         :src="`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`"
       />
@@ -138,6 +140,27 @@ export default {
       const formatter = new Intl.DateTimeFormat('id-ID', options);
       return formatter.format(dateTime);
     },
+    getCurrentDate() {
+      const today = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      };
+      const formatter = new Intl.DateTimeFormat('id-ID', options);
+      return formatter.format(today);
+    },
+    getCurrentTime() {
+      const today = new Date();
+      const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short',
+      };
+      const formatter = new Intl.DateTimeFormat('id-ID', options);
+      return formatter.format(today);
+    },
   },
 };
 </script>
@@ -161,16 +184,40 @@ export default {
   padding-bottom: 15px;
 }
 .result_content {
-  background-color: rgba(0, 119, 255, 0.5);
+  background-color: #ee9322;
   border-radius: 10px;
   padding: 15px;
   color: #ffffff;
   min-width: 50%;
 }
 .result_content2 {
-  background-color: rgba(0, 255, 0, 0.5);
+  background-color: #BFDB38;
   border-radius: 10px;
   color: #ffffff;
+  text-align: center;
+  width: 170px;
+  padding: 10px;
+  margin-right: 10px;
+}
+.text_description {
+  font-size: 16px;
+}
+.scroll_container {
+  width: 750px;
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+.scroll_container::-webkit-scrollbar {
+    width: 10px; /* Lebar scroll bar */
+  }
+.scroll_container::-webkit-scrollbar-thumb {
+  background-color: #4caf50; /* Warna thumb scroll bar */
+  border-radius: 10px; /* Sudut melengkung thumb */
+}
+.scroll_container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Warna latar scroll bar */
+  border-radius: 10px; /* Sudut melengkung background scroll bar */
 }
 @media screen and (max-width: 768px) {
   .result_content {
