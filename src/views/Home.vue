@@ -6,7 +6,9 @@
         <div class="cek-cuaca">CekCuaca</div>
         <div class="menu-items">
           <div class="beranda">Beranda</div>
-          <div class="about-us">About Us</div>
+          <div class="about-us">
+            <a href="AboutUs.vue">About Us</a>
+          </div>
         </div>
     </div>
     <!-- Content Search -->

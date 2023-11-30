@@ -24,48 +24,49 @@
           <div class="result-table-row">
               <div class="result-table-column-1">
                 <tr class="result_tableRow">
-                  <td><h5>Suhu rerata</h5></td>
+                  <td><h6>Suhu rerata</h6></td>
                   <td>
-                    <h5 class="tableValue">
+                    <h6 class="tableValue">
                       {{ data.main.temp }} <span>&#176;C</span>
-                    </h5>
+                    </h6>
                   </td>
                 </tr>
+
                 <tr class="result_tableRow">
-                  <td><h5>Suhu minimum</h5></td>
+                  <td><h6>Suhu minimum</h6></td>
                   <td>
-                    <h5 class="tableValue">
+                    <h6 class="tableValue">
                       {{ data.main.temp_min }} <span>&#176;C</span>
-                    </h5>
+                    </h6>
                   </td>
                 </tr>
                 <tr class="result_tableRow">
-                  <td><h5>Suhu maksimum</h5></td>
+                  <td><h6>Suhu maksimum</h6></td>
                   <td>
-                    <h5 class="tableValue">
+                    <h6 class="tableValue">
                       {{ data.main.temp_max }} <span>&#176;C</span>
-                    </h5>
+                    </h6>
                   </td>
                 </tr>
               </div>
 
               <div class="result-table-column-2">
                 <tr class="result_tableRow">
-                  <td><h5>Tekanan</h5></td>
+                  <td><h6>Tekanan</h6></td>
                   <td>
-                    <h5 class="tableValue">{{ data.main.pressure }} hPa</h5>
+                    <h6 class="tableValue">{{ data.main.pressure }} hPa</h6>
                   </td>
                 </tr>
                 <tr class="result_tableRow">
-                  <td><h5>Kelembapan</h5></td>
+                  <td><h6>Kelembapan</h6></td>
                   <td>
-                    <h5 class="tableValue">{{ data.main.humidity }}%</h5>
+                    <h6 class="tableValue">{{ data.main.humidity }}%</h6>
                   </td>
                 </tr>
                 <tr class="result_tableRow">
-                  <td><h5>Kecepatan Angin</h5></td>
+                  <td><h6>Kecepatan Angin</h6></td>
                   <td>
-                    <h5 class="tableValue">{{ data.wind.speed }} m/s</h5>
+                    <h6 class="tableValue">{{ data.wind.speed }} m/s</h6>
                   </td>
                 </tr>
               </div>
@@ -94,7 +95,7 @@
       </div>
     
     <div v-else-if="data.message && !data.isLoading">
-      <h5 class="result_notfound">Kota tidak ditemukan</h5>
+      <h6 class="result_notfound">Kota tidak ditemukan</h6>
     </div>
   </div>
 </template>
@@ -206,13 +207,13 @@ export default {
   margin-top: -5px;
 }
 .result_table {
-  width: 399px;
+  width: 500px;
   height: 130px;
   position: relative;
   overflow: hidden;
 }
 .result_tableRow {
-  color: #ffffff;
+  color: #292929;
 
 }
 .tableValue {
@@ -242,6 +243,12 @@ export default {
   bottom: 20%;
   top: 20.77%;
   height: 59.23%;
+}
+.table-row {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  inset: 0;
 }
 </style>
 
@@ -344,7 +351,6 @@ export default {
   width: 150px;
   height: 150px;
   position: relative;
-  margin-top: 25px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -367,6 +373,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 25px;
 }
 .judul-cuaca {
   color: #292929;
