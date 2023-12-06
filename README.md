@@ -12,3 +12,12 @@
 
 - Menampilkan perkiraan cuaca suatu kota
 - Menampilkan perkiraan cuaca per 3 jam
+
+## Anggota Kelompok
+- Syahrul Maula Azmi	    (21520241002)
+- Surya Agung Saputra 	    (21520241003)
+- Lutfi Nur Rohmah 		    (21520241014)
+- Damar Albaribin Syamsu 	(21520244009)
+- Hanasta David Fauza 		(21520244011)
+
+
